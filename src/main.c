@@ -55,7 +55,7 @@ int main()
 	imu_init();
 	digitalIO_init();
 	servo_init();
-	//motor_init();
+//	motor_init();
 	st_init();
 	uart_init();
 	hcp_init();

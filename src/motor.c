@@ -80,6 +80,12 @@ void motor_init()
 	gpio_pinCfg(pin_mode_01, MODE_OUT|OTYPE_PP|SPEED_LOW, 0);
 	gpio_pinCfg(pin_mode_23, MODE_OUT|OTYPE_PP|SPEED_LOW, 0);
 	uint8_t motor;
+	for(motor=0; motor<4; motor++) 
+	{
+		gpio_pinCfg(fetOutput[motor], MODE_OUT|OTYPE_PP|SPEED_LOW, 0);
+		gpio_pinSet(fetOutput[motor], false);
+	}
+
 	for(motor=0; motor<MOTOR_COUNT; motor++) gpio_pinCfg(pin_a[motor], MODE_OUT|OTYPE_PP|SPEED_LOW, 0);
 	for(motor=0; motor<MOTOR_COUNT; motor++) gpio_pinCfg(pin_b[motor], MODE_OUT|OTYPE_PP|SPEED_LOW, 0);
 
@@ -101,7 +107,6 @@ void motor_init()
 	NVIC_SetPriority(TIM2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 1, 1));
 	NVIC_EnableIRQ(TIM2_IRQn); //enable TIM2 global Interrupt
 
-	for(motor=0; motor<4; motor++) gpio_pinCfg(fetOutput[motor], MODE_OUT|OTYPE_PP|SPEED_LOW, 0);
 }
 
 
