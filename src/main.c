@@ -37,6 +37,7 @@ int main()
 	NVIC_SetPriorityGrouping(1);
 	systick_init();
 	gpio_init();
+	motor_init();
 	adc_init();
 	power_init();
 	output_init();
@@ -54,7 +55,7 @@ int main()
 	imu_init();
 	digitalIO_init();
 	servo_init();
-	motor_init();
+	//motor_init();
 	st_init();
 	uart_init();
 	hcp_init();
