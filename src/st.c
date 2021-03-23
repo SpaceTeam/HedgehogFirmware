@@ -107,9 +107,9 @@ void st_setPressureThreshold(int8_t threshold, uint8_t hysteresis) // bar, bar/1
 	pressureHysteresis = (float)hysteresis / 10.0;
 }
 
-uint8_t st_getPressureThreshold(void)
+int8_t st_getPressureThreshold(void)
 {
-	return (uint8_t)(pressureThreshold);
+	return (int8_t)(pressureThreshold);
 }
 uint8_t st_getPressureHysteresis(void)
 {
