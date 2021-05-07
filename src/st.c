@@ -2,6 +2,7 @@
 #include <stm32f4xx.h>
 #include "gpio.h"
 #include <math.h>
+#include "motor.h"
 #include "servo.h"
 #include "adc.h"
 #include "systick.h"
@@ -167,6 +168,8 @@ void st_loop(void)
 				systick_lastMovement = systick_last;
 			}
 		}
+		motor_set(0, MOTOR_MODE_POWER, (valvePercentage > 10.0) ? 1000 : 0);
+
 		servo_setOntime(2, (uint16_t)(1040 + valvePercentage / 100.0 * 950.0 + 0.5) * 2);
 
 		servo_setEnabled(2, (systick_lastMovement  + 2000 > systick_last)); //disable servo after 2seconds

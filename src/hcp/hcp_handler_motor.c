@@ -23,7 +23,7 @@ void hcp_handler_motor(hcp_conn_t conn, uint8_t opcode, size_t payloadLength) //
 		if(ringbuffer_pop(conn.rxBuffer, &pv_l)) return;
 		int16_t pv = (pv_h << 8) | pv_l;
 
-		if(port >= MOTOR_COUNT + 4)
+		if((port >= MOTOR_COUNT + 4) || (port == 0))
 		{
 			ringbuffer_push(conn.txBuffer, HCP_INVALID_PORT);
 			return;
@@ -86,7 +86,7 @@ void hcp_handler_motor(hcp_conn_t conn, uint8_t opcode, size_t payloadLength) //
 		if(ringbuffer_pop(conn.rxBuffer, &pos_0)) return;
 		int32_t pos = (pos_3 << 24) | (pos_2 << 16) | (pos_1 << 8) | pos_0;
 
-		if(port >= MOTOR_COUNT)
+		if((port >= MOTOR_COUNT) || (port == 0))
 		{
 			ringbuffer_push(conn.txBuffer, HCP_INVALID_PORT);
 			return;
@@ -133,7 +133,7 @@ void hcp_handler_motor(hcp_conn_t conn, uint8_t opcode, size_t payloadLength) //
 		if(ringbuffer_pop(conn.rxBuffer, &pos_0)) return;
 		int32_t pos = (pos_3 << 24) | (pos_2 << 16) | (pos_1 << 8) | pos_0;
 
-		if(port >= MOTOR_COUNT)
+		if((port >= MOTOR_COUNT) || (port == 0))
 		{
 			ringbuffer_push(conn.txBuffer, HCP_INVALID_PORT);
 			return;
@@ -146,7 +146,7 @@ void hcp_handler_motor(hcp_conn_t conn, uint8_t opcode, size_t payloadLength) //
 		uint8_t port;
 		if(ringbuffer_pop(conn.rxBuffer, &port)) return;
 
-		if(port >= MOTOR_COUNT)
+		if((port >= MOTOR_COUNT) || (port == 0))
 		{
 			ringbuffer_push(conn.txBuffer, HCP_INVALID_PORT);
 			return;
@@ -165,7 +165,7 @@ void hcp_handler_motor(hcp_conn_t conn, uint8_t opcode, size_t payloadLength) //
 		uint8_t enc_b;
 		if(ringbuffer_pop(conn.rxBuffer, &enc_b)) return;
 
-		if(port >= MOTOR_COUNT || enc_a == enc_b || enc_a > 7 || enc_b > 7)
+		if(port >= MOTOR_COUNT || enc_a == enc_b || enc_a > 7 || enc_b > 7 || port == 0)
 		{
 			ringbuffer_push(conn.txBuffer, HCP_INVALID_PORT);
 			return;
@@ -178,7 +178,7 @@ void hcp_handler_motor(hcp_conn_t conn, uint8_t opcode, size_t payloadLength) //
 		uint8_t port;
 		if(ringbuffer_pop(conn.rxBuffer, &port)) return;
 
-		if(!(port == 0 || port == 2))
+		if( port != 2)
 		{
 			ringbuffer_push(conn.txBuffer, HCP_INVALID_PORT);
 			return;
